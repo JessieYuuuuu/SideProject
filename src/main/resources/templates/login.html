@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>登入頁</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="fragment.css">
+    <link rel="stylesheet" href="test.css">
+</head>
+
+<body>
+    <div th:if="${member == null}" th:insert="fragments::header"></div>
+    <div th:if="${member!= null}" th:insert="fragments::userHeader"></div>
+    <main>
+        <h3>登入頁面</h3>
+        <div id="BOX">
+            <form th:action="@{/login_submit}" th:object="${newMember}" method="post">
+                Account: <input type="text" id="account" th:field="*{account}"><br>
+                Password: <input type="password" id="passwd" th:field="*{passwd}"><br>
+                <button type="submit">登入</button>
+                <span th:if="${loginError}">登入失敗，請確認帳號密碼</span>
+            </form>
+            <p>
+                還沒有帳號嗎? <button th:onclick="'window.location.href=\'' + @{/addMember} + '\''">成為會員</button>
+            </p>
+        </div>
+    </main>
+    <div th:replace="fragments::footer"></div>
+
+
+</body>
+
+</html>
