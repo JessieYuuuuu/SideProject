@@ -1,9 +1,18 @@
+/* 設定網頁內外距為0，加入底色 */
 * {
     margin: 0;
     padding: 0;
     background-color: #bbc8d8;
 }
 
+/* 導覽列容器固定 */
+.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* 以下導覽列樣式 */
 header {
     display: flex;
     align-items: center;
@@ -13,9 +22,6 @@ header {
     color: #eaeff3;
     font-size: 20px;
     padding: 0 30px 0 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 .headerBtn {
@@ -75,6 +81,7 @@ header img {
     border-bottom: 3px solid #c59650;
 }
 
+/* 以下footer樣式 */
 footer {
     display: flexbox;
     align-items: center;

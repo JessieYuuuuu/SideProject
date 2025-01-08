@@ -17,8 +17,8 @@
 </head>
 
 <body>
-    <div th:if="${member == null}" th:insert="fragments::header"></div>
-    <div th:if="${member!= null}" th:insert="fragments::userHeader"></div>
+    <div class="sticky" th:if="${member == null}" th:insert="fragments::header"></div>
+    <div class="sticky" th:if="${member!= null}" th:insert="fragments::userHeader"></div>
     <main>
         <section class="row">
             <div class="col-4">
@@ -140,14 +140,11 @@
     </main>
     <div th:replace="fragments::footer"></div>
     <script src="jquery-3.7.1.js"></script>
-    <script src="search.js"></script>
     <script>
         $("#searchButton").on('click', function () {
             $("#searchForm").submit();
             console.log("觸發搜尋成功")
         });
-
-        // 獲取 URL 查詢參數
         function getQueryParams() {
             let params = {};
             window.location.search.substring(1).split("&").forEach(param => {
@@ -159,8 +156,6 @@
             });
             return params;
         }
-
-        // 將查詢參數應用到表單中
         function applyQueryParams(params) {
             if (params.keyword) {
                 $("#keyword").val(params.keyword[0]);
@@ -174,7 +169,6 @@
                 });
             }
         }
-        // 當文檔加載完成後應用查詢參數
         $(document).ready(function () {
             let params = getQueryParams();
             applyQueryParams(params);

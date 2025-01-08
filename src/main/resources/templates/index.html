@@ -17,8 +17,8 @@
 </head>
 
 <body>
-	<div th:if="${member == null}" th:insert="fragments::header"></div>
-	<div th:if="${member!= null}" th:insert="fragments::userHeader"></div>
+	<div class="sticky" th:if="${member == null}" th:insert="fragments::header"></div>
+	<div class="sticky" th:if="${member!= null}" th:insert="fragments::userHeader"></div>
 
 	<main>
 		<!-- <section class="row">
@@ -183,10 +183,9 @@
 	</main>
 	<div th:replace="fragments::footer"></div>
 	<script src="jquery-3.7.1.js"></script>
-	<script src="index.js"></script>
 	<script>
 		$(document).ready(function () {
-			console.log("Document ready"); // 調試信息
+			console.log("Document ready");
 			$("#searchButton").on('click', function () {
 				console.log("觸發搜尋");
 				$("#searchForm").submit();

@@ -16,8 +16,8 @@
 </head>
 
 <body>
-    <div th:if="${member == null}" th:insert="fragments::header"></div>
-    <div th:if="${member!= null}" th:insert="fragments::userHeader"></div>
+    <div class="sticky" th:if="${member == null}" th:insert="fragments::header"></div>
+    <div class="sticky" th:if="${member!= null}" th:insert="fragments::userHeader"></div>
     <main>
         <h3>登入頁面</h3>
         <div id="BOX">
