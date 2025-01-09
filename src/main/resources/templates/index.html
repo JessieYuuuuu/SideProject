@@ -186,28 +186,45 @@
 	<script>
 		$(document).ready(function () {
 			console.log("I'm ready !!!");
+
+			//新增鍵盤監聽事件
+			$(document).on('keypress', function (e) {
+				if (e.which === 13) {
+					e.preventDefault();
+					$("#searchButton").click();
+				}
+			})
+			//當搜尋鈕被點擊時處理請求及更新URL
 			$("#searchButton").on('click', function () {
 				console.log("首頁觸發搜尋");
 				var keyword = $("#keyword").val();
 				var option = [];
 
+				//搜集被選到的checkBox
 				$("input[name='options']:checked").each(function () {
 					option.push($(this).val());
 				});
+				// console.log(option.length);
 
-				var params = new URLSearchParams();
-				params.append("keyword", keyword);
-				option.forEach(option =>
-					params.append("options", option));
+				if (keyword != "" || option.length != 0) {
+					var params = new URLSearchParams();
+					params.append("keyword", keyword);
+					option.forEach(option =>
+						params.append("options", option));
 
-				window.location.href = "/search?" + params.toString();
-				console.log("使用者輸入為: " + keyword + ",checkbox: " + option);
+					//存為URL
+					window.location.href = "/search?" + params.toString();
+					console.log("使用者輸入為: " + keyword + ",checkbox: " + option);
+				}
 
-				$.post("/saveKeyword", { userKeyword: keyword }, function (response) {
-					console.log("關鍵字已儲存");
-				}).fail(function (jqXHR, textStatus, errorThrown) {
-					console.log("請求失敗: " + textStatus + ", " + errorThrown);
-				});
+				//交給後端存入關鍵字
+				if (keyword != "") {
+					$.post("/saveKeyword", { userKeyword: keyword }, function (response) {
+						console.log("關鍵字已儲存");
+					}).fail(function (jqXHR, textStatus, errorThrown) {
+						console.log("請求失敗: " + textStatus + ", " + errorThrown);
+					});
+				}
 			});
 		});
 	</script>

@@ -172,6 +172,15 @@
             //初始化時應用URL中的參數
             let params = getQueryParams();
             applyQueryParams(params);
+
+            //新增鍵盤監聽事件
+            $(document).on('keypress', function (e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    $("#searchButton").click();
+                }
+            })
+
             //當搜尋鈕被點擊時處理請求及更新URL
             $("#searchButton").on('click', function () {
                 console.log("搜尋頁觸發搜尋");
@@ -183,22 +192,25 @@
                     option.push($(this).val());
                 });
 
-                var params = new URLSearchParams();
-                params.append("keyword", keyword);
-                option.forEach(option =>
-                    params.append("options", option));
+                if (keyword != "" || option.length != 0) {
+                    var params = new URLSearchParams();
+                    params.append("keyword", keyword);
+                    option.forEach(option =>
+                        params.append("options", option));
 
-                //更新URL
-                window.history.pushState({}, '', "/search?" + params.toString());
+                    //存為URL
+                    window.location.href = "/search?" + params.toString();
+                    console.log("使用者輸入為: " + keyword + ",checkbox: " + option);
+                }
 
-                console.log("使用者輸入為: " + keyword + ",checkbox: " + option);
-
-                //後端存入關鍵字
-                $.post("/saveKeyword", { userKeyword: keyword }, function (response) {
-                    console.log("關鍵字 " + response + " 已儲存");
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    console.log("請求失敗: " + textStatus + ", " + errorThrown);
-                });
+                //交給後端存入關鍵字
+                if (keyword != "") {
+                    $.post("/saveKeyword", { userKeyword: keyword }, function (response) {
+                        console.log("關鍵字已儲存");
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        console.log("請求失敗: " + textStatus + ", " + errorThrown);
+                    });
+                }
             });
         });
     </script>
