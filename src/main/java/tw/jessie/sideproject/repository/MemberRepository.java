@@ -7,8 +7,9 @@ import org.springframework.stereotype.Repository;
 import tw.jessie.sideproject.model.Member;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member,Long> {
-    //已有SQL基本語法
+public interface MemberRepository extends JpaRepository<Member,Long> { //已有SQL基本語法
+    
 	
-	Optional<Member>  findByAccount(String account);
+	Optional<Member>  findByAccount(String account); //抓取用戶輸入的帳號
+
 }

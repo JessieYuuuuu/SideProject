@@ -78,7 +78,9 @@
             <div id="caseBox" class="col-8">
                 <div class="search-container">
                     <input type="text" id="keyword" placeholder="預填文字提示">
-                    <button type="button" id="searchButton"><i class="bi bi-search"></i></button>
+                    <button type="button" id="searchButton">
+                        <i class="bi bi-search"></i>
+                    </button>
                 </div>
                 <div>建議熱搜詞，如技術上無法實現則移除</div>
                 <div id="btn">
@@ -141,14 +143,10 @@
     <div th:replace="fragments::footer"></div>
     <script src="jquery-3.7.1.js"></script>
     <script>
-        $("#searchButton").on('click', function () {
-            $("#searchForm").submit();
-            console.log("觸發搜尋成功")
-        });
         function getQueryParams() {
+            var urlParams = new URLSearchParams(window.location.search);
             let params = {};
-            window.location.search.substring(1).split("&").forEach(param => {
-                let [key, value] = param.split("=");
+            urlParams.forEach((value, key) => {
                 if (!params[key]) {
                     params[key] = [];
                 }
@@ -170,8 +168,38 @@
             }
         }
         $(document).ready(function () {
+            console.log("I'm ready !!!");
+            //初始化時應用URL中的參數
             let params = getQueryParams();
             applyQueryParams(params);
+            //當搜尋鈕被點擊時處理請求及更新URL
+            $("#searchButton").on('click', function () {
+                console.log("搜尋頁觸發搜尋");
+                var keyword = $("#keyword").val();
+                var option = [];
+
+                //搜集被選到的checkBox
+                $("input[name='options']:checked").each(function () {
+                    option.push($(this).val());
+                });
+
+                var params = new URLSearchParams();
+                params.append("keyword", keyword);
+                option.forEach(option =>
+                    params.append("options", option));
+
+                //更新URL
+                window.history.pushState({}, '', "/search?" + params.toString());
+
+                console.log("使用者輸入為: " + keyword + ",checkbox: " + option);
+
+                //後端存入關鍵字
+                $.post("/saveKeyword", { userKeyword: keyword }, function (response) {
+                    console.log("關鍵字 " + response + " 已儲存");
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    console.log("請求失敗: " + textStatus + ", " + errorThrown);
+                });
+            });
         });
     </script>
 

@@ -49,7 +49,7 @@
 				<div class="row">
 					<div class="col-3">
 						<h2>發布日期</h2>
-						
+
 					</div>
 					<div class="col-9">
 						<h3>案件名稱</h3>
@@ -185,10 +185,29 @@
 	<script src="jquery-3.7.1.js"></script>
 	<script>
 		$(document).ready(function () {
-			console.log("Document ready");
+			console.log("I'm ready !!!");
 			$("#searchButton").on('click', function () {
-				console.log("觸發搜尋");
-				$("#searchForm").submit();
+				console.log("首頁觸發搜尋");
+				var keyword = $("#keyword").val();
+				var option = [];
+
+				$("input[name='options']:checked").each(function () {
+					option.push($(this).val());
+				});
+
+				var params = new URLSearchParams();
+				params.append("keyword", keyword);
+				option.forEach(option =>
+					params.append("options", option));
+
+				window.location.href = "/search?" + params.toString();
+				console.log("使用者輸入為: " + keyword + ",checkbox: " + option);
+
+				$.post("/saveKeyword", { userKeyword: keyword }, function (response) {
+					console.log("關鍵字已儲存");
+				}).fail(function (jqXHR, textStatus, errorThrown) {
+					console.log("請求失敗: " + textStatus + ", " + errorThrown);
+				});
 			});
 		});
 	</script>
