@@ -82,7 +82,17 @@
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
-                <div>建議熱搜詞，如技術上無法實現則移除</div>
+                <!-- <div>建議熱搜詞，如技術上無法實現則移除</div> -->
+                <tr th:each="Keyword:${kw}">
+					<td th:text=${Keyword.keyword}></td>
+				</tr>
+                <!-- <div>
+					<span th:text=${kw.keyword}></span>
+					<span th:text=${kw.keyword}></span>
+					<span th:text=${kw.keyword}></span>
+					<span th:text=${kw.keyword}></span>
+					<span th:text=${kw.keyword}></span>
+				</div> -->
                 <div id="btn">
                     <button>發布時間</button>
                     <button>收藏數</button>

@@ -13,15 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import tw.jessie.sideproject.model.Keywords;
 import tw.jessie.sideproject.model.Member;
 import tw.jessie.sideproject.model.Project;
 import tw.jessie.sideproject.model.Tag;
 import tw.jessie.sideproject.repository.MemberRepository;
 import tw.jessie.sideproject.repository.TagRepository;
+import tw.jessie.sideproject.service.KeywordService;
 import tw.jessie.sideproject.service.MemberService;
 
 @Controller
 public class PageController {
+
+	@Autowired
+	private KeywordService keywordService;
 
 	@GetMapping("/search")
 	public String search(Model model, HttpSession session) {
@@ -32,6 +37,11 @@ public class PageController {
 		} else {
 			System.out.println("indexXX");
 		}
+		List<Keywords> list = keywordService.getKeywordDesc();
+		for(Keywords keywords : list) {
+			System.out.println(keywords.getKeyword());
+		}
+		model.addAttribute("kw",list);
 		return "search";
 	}
 
@@ -44,6 +54,11 @@ public class PageController {
 		} else {
 			System.out.println("indexXX");
 		}
+		List<Keywords> list = keywordService.getKeywordDesc();
+		for(Keywords keywords : list) {
+			System.out.println(keywords.getKeyword());
+		}
+		model.addAttribute("kw",list);
 		return "index";
 	}
 }

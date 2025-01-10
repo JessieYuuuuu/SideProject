@@ -1,8 +1,10 @@
 package tw.jessie.sideproject.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import tw.jessie.sideproject.model.Keywords;
@@ -28,5 +30,10 @@ public class KeywordService {
 			keywordRepository.save(newKeyword);
 			System.out.println("新增 "+newKeyword.getKeyword()+" 關鍵詞");
 		}
+	}
+	
+	public List<Keywords> getKeywordDesc(){
+		List<Keywords> top5Keywords = keywordRepository.findTop5ByOrderByTimesDesc();
+		return top5Keywords;
 	}
 }
