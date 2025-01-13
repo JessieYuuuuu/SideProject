@@ -31,12 +31,4 @@ public class KeywordController {
 		return new ResponseEntity<>(randomKeyword, HttpStatus.OK);
 	}
 
-//	public void hotWord() {
-//		List<Keywords> list = keywordService.getKeywordDesc();
-//		for(Keywords keywords : list) {
-//			System.out.println(keywords.getKeyword());
-//		}
-//		
-//	}
-
 }
