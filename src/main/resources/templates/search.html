@@ -84,7 +84,9 @@
                 </div>
                 <!-- <div>建議熱搜詞，如技術上無法實現則移除</div> -->
                 <tr th:each="Keyword:${kw}">
-					<td th:text=${Keyword.keyword}></td>
+					<button class="keywordBtn">
+						<td th:text=${Keyword.keyword}></td>
+					</button>
 				</tr>
                 <!-- <div>
 					<span th:text=${kw.keyword}></span>
@@ -222,6 +224,12 @@
                     });
                 }
             });
+            //針對新增在頁面上的關鍵字加入點擊功能
+            $(".keywordBtn").on('click',function(){
+				console.log($(this).text());
+				$("#keyword").val($(this).text().trim());
+				$("#searchButton").click();
+			})
         });
     </script>
 
