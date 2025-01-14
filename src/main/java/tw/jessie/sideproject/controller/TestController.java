@@ -14,6 +14,6 @@ public class TestController {
 
 	@GetMapping("/test2")
 	public String test2() {
-		return "fragments";
+		return "test2";
 	}
 }

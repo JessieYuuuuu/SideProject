@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>首頁SideProject</title>
+	<title>Test Page 1</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -12,25 +12,26 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="fragment.css">
-	<link rel="stylesheet" href="test.css">
+	<link rel="stylesheet" href="CSS/fragment.css">
+	<link rel="stylesheet" href="CSS/test.css">
 </head>
 
 <body>
 	<div class="sticky" th:if="${member == null}" th:insert="fragments::header"></div>
 	<div class="sticky" th:if="${member!= null}" th:insert="fragments::userHeader"></div>
-    
-    <main>
-        <!-- <section class="row">
-            <div id="unknown">最新消息</div>
-		</section> -->
-        測試測試測試測試測試測試測試測試<br>
-        測試測試測試測試測試測試測試測試<br>
-        測試測試測試測試測試測試測試測試<br>
-        測試測試測試測試測試測試測試測試<br>
-        測試測試測試測試測試測試測試測試<br>
-        測試測試測試測試測試測試測試測試<br>
-        測試測試測試測試測試測試測試測試<br>
+
+	<main>
+		<h1>首頁</h1>
+		<button id="loadContentBtn">載入內容</button>
+		<div id="contentArea"></div>
+
+		測試測試測試測試測試測試測試測試 <br>
+		測試測試測試測試測試測試測試測試 <br>
+		測試測試測試測試測試測試測試測試 <br>
+		測試測試測試測試測試測試測試測試 <br>
+		測試測試測試測試測試測試測試測試 <br>
+		測試測試測試測試測試測試測試測試 <br>
+		測試測試測試測試測試測試測試測試 <br>
 		<br><br><br><br><br>
 		<br><br><br><br><br>
 		<br><br><br><br><br>
@@ -43,12 +44,13 @@
 	<div th:replace="fragments::footer"></div>
 	<script src="jquery-3.7.1.js"></script>
 	<script>
-		$(document).ready(function () {
-			console.log("Document ready");
-			$("#searchButton").on('click', function () {
-				console.log("觸發搜尋");
-				$("#searchForm").submit();
-			});
+		document.getElementById("loadContentBtn").addEventListener("click", function () {
+			fetch("test2")
+			.then(response => response.text())
+			.then(data => { 
+				document.getElementById("contentArea").innerHTML = data; 
+			})
+			.catch(error => console.error('Error loading content:', error));
 		});
 	</script>
 </body>

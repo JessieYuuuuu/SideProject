@@ -63,7 +63,7 @@ public class MemberController {
 		} else {
 			model.addAttribute("project", new Project());
 			// 登入成功後，轉向頁面
-			return "loginuser";
+			return "memberCenter";
 		}
 	}
 
@@ -108,7 +108,7 @@ public class MemberController {
 			} else {
 				model.addAttribute("project", new Project());
 				// 登入成功後，轉向頁面
-				return "loginuser";
+				return "memberCenter";
 			}
 		} else {
 			Member member = new Member();

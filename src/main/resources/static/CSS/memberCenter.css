@@ -1,0 +1,61 @@
+main {
+    padding: 0 10%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.stickyCenterBox {
+    position: sticky;
+    top: 80px;
+    /* z-index: 1000; */
+}
+div{
+    border: 1px solid blue;
+}
+#centerBox{
+    padding: 0;
+    display: flexbox;
+    position: sticky;
+    top: 80px;
+}
+#centerMemberIcon{
+    width: 100%;
+    align-items: center;
+}
+#centerMemberIcon>img{
+    width: 100%;
+}
+#centerBox>p{
+    line-height: 36px;
+    text-align: center;
+    margin: 0;
+    background-color: rgb(199, 225, 247);
+}
+#centerBox>button{
+    line-height: 30px;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+}
+#centerBox>button:hover{
+    width: 100%;
+    border: none;
+    background-color: pink
+}
+#centerBox button[type="submit"]{
+    line-height: 30px;
+    width: 100%;
+    border: none;
+    background-color: rgb(255, 165, 165);
+
+}
+#centerBox button[type="submit"]:hover{
+    width: 100%;
+    border: none;
+    color: red;
+    background-color: rgb(255, 165, 165);
+
+}
+
+#centerText{
+    padding: 20px;
+}
