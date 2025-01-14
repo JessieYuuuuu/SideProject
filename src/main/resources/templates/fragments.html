@@ -15,7 +15,7 @@
 	<!-- 只有此頁面可以在VS Code用Live Server開啟，CSS link 如下 -->
 	<link rel="stylesheet" href="/src/main/resources/static/fragment.css">
 	<!-- 各自頁面要用日蝕spring跑才看得到，CSS link 如下，加在自己頁面的head -->
-	<link rel="stylesheet" href="fragment.css">
+	<link rel="stylesheet" href="CSS/fragment.css">
 	<!-- 如果你們的頁面加入下面註解的header跟footer代碼後要用日蝕spring跑才看得到效果 -->
 </head>
 
@@ -26,7 +26,7 @@
 	<div class="sticky" th:if="${member!= null}" th:insert="fragments::userHeader"></div> 
 	-->
 	<header th:fragment="header">
-		<button id="logoBtn" th:onclick="'window.location.href=\'' + @{/index} + '\''"><img src="LOGO.png"
+		<button id="logoBtn" th:onclick="'window.location.href=\'' + @{/index} + '\''"><img src="img/logowhite.png"
 				alt=""></button>
 		<div class="headerBtn">
 			<button class="varBtn" th:onclick="'window.location.href=\'' + @{/search} + '\''">找case</button>
@@ -35,7 +35,7 @@
 		</div>
 	</header>
 	<header th:if="${member != null}" th:fragment="userHeader">
-		<button id="logoBtn" th:onclick="'window.location.href=\'' + @{/index} + '\''"><img src="LOGO.png"
+		<button id="logoBtn" th:onclick="'window.location.href=\'' + @{/index} + '\''"><img src="img/logowhite.png"
 				alt=""></button>
 		<div class="headerBtn">
 			<button class="varBtn" th:onclick="'window.location.href=\'' + @{/search} + '\''">找case</button>
@@ -59,7 +59,7 @@
 	<br><br><br><br><br>
 
 	<!--
-	footer 片段，在你們的頁面加入以下碼 
+	footer 片段，在你們的頁面加入以下代碼 
 	<div th:replace="fragments::footer"></div>
 	-->
 	<footer th:fragment="footer">

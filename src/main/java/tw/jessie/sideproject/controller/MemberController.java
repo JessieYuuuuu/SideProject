@@ -32,7 +32,7 @@ public class MemberController {
 			System.out.println("index目前登入狀態:" + member.getName() + "%n");
 			model.addAttribute("member", member);
 		} else {
-			System.out.println("indexXX");
+			System.out.println("訪客模式:登入");
 		}
 		// 點擊登入button時返回 login.html 模板
 		System.out.println("觸發/login");
@@ -71,10 +71,10 @@ public class MemberController {
 	public String addmember(Model model, HttpSession session) {
 		if (session.getAttribute("member") != null) {
 			Member member = (Member) session.getAttribute("member");
-			System.out.println("addMember目前登入狀態:" + member.getName() + "%n");
+			System.out.println("addMember目前登入狀態:" + member.getName());
 			model.addAttribute("member", member);
 		} else {
-			System.out.println("addMemberXX");
+			System.out.println("訪客模式:加入會員");
 		}
 		model.addAttribute("newMember", new Member());
 		return "addMember";
@@ -99,7 +99,7 @@ public class MemberController {
 		System.out.println("userlogingdebug:已進入userloging");
 		if (session.getAttribute("member") != null) {
 			Member member = (Member) session.getAttribute("member");
-			System.out.println("userloging目前登入狀態:" + member.getName() + "%n");
+			System.out.println("userloging目前登入狀態:" + member.getName());
 			model.addAttribute("member", member);
 			System.out.println("userlogingdebug1:" + member.getAccount());
 			if (member.getAccount().equals("admin")) {
@@ -112,8 +112,7 @@ public class MemberController {
 			}
 		} else {
 			Member member = new Member();
-			model.addAttribute("member", member);
-			System.out.println("userlogingXX");
+			model.addAttribute("登入失敗");
 			return "login";
 		}
 	}

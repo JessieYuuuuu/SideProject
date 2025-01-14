@@ -35,7 +35,7 @@ public class PageController {
 			System.out.println("index目前登入狀態:" + member.getName() + "%n");
 			model.addAttribute("member", member);
 		} else {
-			System.out.println("indexXX");
+			System.out.println("訪客模式:搜尋頁");
 		}
 		List<Keywords> list = keywordService.getKeywordDesc();
 		for(Keywords keywords : list) {
@@ -52,7 +52,7 @@ public class PageController {
 			System.out.println("index目前登入狀態:" + member.getName() + "%n");
 			model.addAttribute("member", member);
 		} else {
-			System.out.println("indexXX");
+			System.out.println("訪客模式:首頁");
 		}
 		List<Keywords> list = keywordService.getKeywordDesc();
 		for(Keywords keywords : list) {
