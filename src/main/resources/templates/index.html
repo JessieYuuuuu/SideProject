@@ -94,11 +94,12 @@
 					</button>
 				</div>
 				<!-- <div>建議熱搜詞，如技術上無法實現則移除</div> -->
-				<tr th:each="Keyword:${kw}">
-					<button class="keywordBtn">
-						<td th:text=${Keyword.keyword}></td>
-					</button>
-				</tr>
+				<div class="keywordList">
+					<tr th:each="Keyword:${kw}">
+						<button class="keywordBtn">
+							<td th:text=${Keyword.keyword}></td>
+						</button>
+				</div>
 				<!-- <div>
 					<span th:text=${kw.keyword}></span>
 					<span th:text=${kw.keyword}></span>
