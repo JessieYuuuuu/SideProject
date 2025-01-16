@@ -13,12 +13,13 @@ public class MemberCenterController {
 
 	@GetMapping("/membercenter")
 	public String memberCenter(Model model, HttpSession session){
-		Member member = new Member();
-		member.setAccount("Test");
-		member.setName("測試");
-		model.addAttribute("member", member);
-		session.getAttribute("member");
-		return"memberCenter";
+		if (session.getAttribute("member") != null) {
+			Member member = (Member) session.getAttribute("member");
+			model.addAttribute("member",member);
+			return"memberCenter";
+			}else {
+				return"forward:/index";
+			}
 	}
 	
 	@GetMapping("/memberSources")
@@ -40,10 +41,10 @@ public class MemberCenterController {
 	}
 	@GetMapping("/memberLike")
 	public String memberLike() {
-		return"memberPush";
+		return"memberLike";
 	}
 	@GetMapping("/memberMail")
 	public String memberMail() {
-		return"memberPush";
+		return"memberMail";
 	}
 }

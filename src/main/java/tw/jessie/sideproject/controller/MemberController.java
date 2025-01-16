@@ -120,6 +120,6 @@ public class MemberController {
 	@PostMapping("/logout")
 	public String logout(HttpSession session, Model model) {
 		session.invalidate();
-		return "index";
+		return "redirect:/index";
 	}
 }
