@@ -11,6 +11,7 @@ function getRandomKeyword() {
         .catch(error => console.error('抓取關鍵字錯誤:', error));
 }
 
+//使用者點搜尋框時清除隨機關鍵字
 function clearPlaceholder() {
     var searchInput = $("#keyword");
     if (searchInput.val() === randomKeyword) {
@@ -85,30 +86,32 @@ $(document).ready(function () {
         $("input[name='options']:checked").each(function () {
             option.push($(this).val());
         });
-
+        option = option.length ? option : [];
+        console.log(option.length);
+        //交給後端存入關鍵字
         if (keyword != "" || option.length != 0) {
             var params = new URLSearchParams();
-            params.append("keyword", keyword);
+            params.append("keyword", encodeURIComponent(keyword));
             option.forEach(option =>
-                params.append("options", option));
+                params.append("options", encodeURIComponent(option)));
 
-            //存為URL
-            window.history.replaceState(null, null, "/search?" + params.toString())
-            console.log("使用者輸入為: " + keyword + ",checkbox: " + option);
-            // 在這裡處理你的搜尋邏輯，例如發送 AJAX 請求 
-            // 例如： 
-            // $.get("/search", { keyword: keyword, options: option }, function(data) {})
-            // 更新頁面內容
-        }
-
-        //交給後端存入關鍵字
-        if (keyword != "") {
-            $.post("/saveKeyword", { userKeyword: keyword }, function (response) {
+            $.post("/SaveAndSearchKeyword", { userKeyword: keyword, options: option }, function (response) {
                 console.log("關鍵字已儲存");
+                //利用thymeleaf模板返回搜尋資料
+                fetch("/SaveAndSearchKeyword")
+                    .then(response => response.text())
+                    .then(data => {
+                        $("#keywordsearchBox").html(data);
+                    })
+                    .catch(error => console.error('Error loading content:', error));
+                //存為URL
+                window.location.href = "/search?" + params.toString();
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 console.log("請求失敗: " + textStatus + ", " + errorThrown);
             });
+            console.log("使用者輸入為: " + keyword + ",checkbox: " + option);
         }
+
     });
     //針對新增在頁面上的關鍵字加入點擊功能
     $(".keywordBtn").on('click', function () {
@@ -116,4 +119,56 @@ $(document).ready(function () {
         $("#keyword").val($(this).text().trim());
         $("#searchButton").click();
     })
+
+    //排序按鈕
+    $("#caseTimeDSC").on('click', function () {
+        console.log("排序被點擊");
+        $("#keywordsearchBox").load("/caseTimeDSC", function (response, status, xhr) {
+            if (status === "error") {
+                console.error('Error loading content:', xhr.statusText);
+            } else {
+                console.log('Content loaded successfully.');
+            }
+        });
+    });
+    $("#caseTimeASC").on('click', function () {
+        console.log("排序被點擊");
+        $("#keywordsearchBox").load("/caseTimeASC", function (response, status, xhr) {
+            if (status === "error") {
+                console.error('Error loading content:', xhr.statusText);
+            } else {
+                console.log('Content loaded successfully.');
+            }
+        });
+    });
+    $("#caseCollected").on('click', function () {
+        console.log("收藏排序被點擊");
+        $("#keywordsearchBox").load("/caseCollected", function (response, status, xhr) {
+            if (status === "error") {
+                console.error('Error loading content:', xhr.statusText);
+            } else {
+                console.log('Content loaded successfully.');
+            }
+        });
+    });
+    //新增全選選項
+    $("input").change(function () {
+        $(`input[class='${this.id}']`).prop('checked', this.checked);
+        $(`input[id='location']`).prop('checked',
+            $(`input[class='location']:checked`).length ==
+            $(`input[class='location']`).length);
+        $(`input[id='category']`).prop('checked',
+            $(`input[class='category']:checked`).length ==
+            $(`input[class='category']`).length);
+        $(`input[id='front']`).prop('checked',
+            $(`input[class='front']:checked`).length ==
+            $(`input[class='front']`).length);
+        $(`input[id='back']`).prop('checked',
+            $(`input[class='back']:checked`).length ==
+            $(`input[class='back']`).length);
+        $(`input[id='database']`).prop('checked',
+            $(`input[class='database']:checked`).length ==
+            $(`input[class='database']`).length);
+    });
+
 });

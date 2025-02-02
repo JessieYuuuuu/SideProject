@@ -14,6 +14,8 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="CSS/fragment.css">
     <link rel="stylesheet" href="CSS/search.css">
+    <link rel="stylesheet" href="../static/CSS/search.css">
+    <link rel="stylesheet" href="../static/CSS/fragment.css">
 </head>
 
 <body>
@@ -21,58 +23,65 @@
     <div class="sticky" th:if="${member!= null}" th:insert="fragments::userHeader"></div>
     <main>
         <section class="row">
-            <div class="col-4">
+            <div class="col-4 formBoxBorder">
                 <form id="searchForm" action="/search" method="get">
-                    地區：<br>
-                    <label><input type="checkbox" name="options" value="taipei">台北市</label>
-                    <label><input type="checkbox" name="options" value="newTaipei">新北市</label>
-                    <label><input type="checkbox" name="options" value="taoyuan">桃園市</label>
-                    <label><input type="checkbox" name="options" value="taichung">台中市</label>
-                    <label><input type="checkbox" name="options" value="tainan">台南市</label>
-                    <label><input type="checkbox" name="options" value="kaohsiung">高雄市</label>
-                    <label><input type="checkbox" name="options" value="keelung">基隆市</label>
-                    <label><input type="checkbox" name="options" value="hsinchuCity">新竹市</label>
-                    <label><input type="checkbox" name="options" value="chiayiCity">嘉義市</label>
-                    <label><input type="checkbox" name="options" value="yilan">宜蘭縣</label>
-                    <label><input type="checkbox" name="options" value="hsinchuCounty">新竹縣</label>
-                    <label><input type="checkbox" name="options" value="miaoli">苗栗縣</label>
-                    <label><input type="checkbox" name="options" value="changhua">彰化縣</label>
-                    <label><input type="checkbox" name="options" value="nantou">南投縣</label>
-                    <label><input type="checkbox" name="options" value="yunlin">雲林縣</label>
-                    <label><input type="checkbox" name="options" value="chiayiCounty">嘉義縣</label>
-                    <label><input type="checkbox" name="options" value="pingtung">屏東縣</label>
-                    <label><input type="checkbox" name="options" value="hualien">花蓮縣</label>
-                    <label><input type="checkbox" name="options" value="taitung">台東縣</label>
-                    <label><input type="checkbox" name="options" value="penghu">澎湖縣</label>
-                    <label><input type="checkbox" name="options" value="kinmen">金門縣</label>
-                    <label><input type="checkbox" name="options" value="lienchiang">連江縣</label>
-                    <br>類型：<br>
-                    <label><input type="checkbox" name="options" value="web">網頁</label>
-                    <label><input type="checkbox" name="options" value="game">遊戲</label>
-                    <label><input type="checkbox" name="options" value="app">APP</label>
-                    <br>前端技能：<br>
-                    <label><input type="checkbox" name="options" value="SCSS">SCSS</label>
-                    <label><input type="checkbox" name="options" value="CSS">CSS</label>
-                    <label><input type="checkbox" name="options" value="Sass">Sass</label>
-                    <label><input type="checkbox" name="options" value="JavaScript">JavaScript</label>
-                    <label><input type="checkbox" name="options" value="JQuery">JQuery</label>
-                    <label><input type="checkbox" name="options" value="Vue">Vue</label>
-                    <label><input type="checkbox" name="options" value="React">React</label>
-                    <label><input type="checkbox" name="options" value="Angular">Angular</label>
-                    <br>後端技能：<br>
-                    <label><input type="checkbox" name="options" value="JAVA">JAVA</label>
-                    <label><input type="checkbox" name="options" value="Python">Python</label>
-                    <label><input type="checkbox" name="options" value="Ruby">Ruby</label>
-                    <label><input type="checkbox" name="options" value="PHP">PHP</label>
-                    <label><input type="checkbox" name="options" value="seeSharp">C#</label>
-                    <label><input type="checkbox" name="options" value="cPlus">C++</label>
-                    <label><input type="checkbox" name="options" value="Go">Go</label>
-                    <label><input type="checkbox" name="options" value="NodeJs">Node.js</label>
-                    <br>資料庫：<br>
-                    <label><input type="checkbox" name="options" value="MySQL">MySQL</label>
-                    <label><input type="checkbox" name="options" value="SQLServer">SQL Server</label>
-                    <label><input type="checkbox" name="options" value="PostgreSQL">PostgreSQL</label>
-                    <label><input type="checkbox" name="options" value="MongoDB">MongoDB</label>
+                    地區：
+                    <label><input type="checkbox" id="location" name="options" value="location">地區全選</label><br>
+                    <label><input type="checkbox" class="location" name="options" value="taipei">台北市</label>
+                    <label><input type="checkbox" class="location" name="options" value="newTaipei">新北市</label>
+                    <label><input type="checkbox" class="location" name="options" value="taoyuan">桃園市</label>
+                    <label><input type="checkbox" class="location" name="options" value="keelung">基隆市</label>
+                    <label><input type="checkbox" class="location" name="options" value="hsinchuCounty">新竹縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="hsinchuCity">新竹市</label>
+                    <label><input type="checkbox" class="location" name="options" value="yilan">宜蘭縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="miaoli">苗栗縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="yunlin">雲林縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="taichung">台中市</label>
+                    <label><input type="checkbox" class="location" name="options" value="changhua">彰化縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="nantou">南投縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="tainan">台南市</label>
+                    <label><input type="checkbox" class="location" name="options" value="kaohsiung">高雄市</label>
+                    <label><input type="checkbox" class="location" name="options" value="chiayiCounty">嘉義縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="chiayiCity">嘉義市</label>
+                    <label><input type="checkbox" class="location" name="options" value="hualien">花蓮縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="taitung">台東縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="pingtung">屏東縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="penghu">澎湖縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="kinmen">金門縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="lienchiang">連江縣</label>
+                    <label><input type="checkbox" class="location" name="options" value="remote">遠端</label>
+                    <br>類型：
+                    <label><input type="checkbox" id="category" name="options" value="category">類型全選</label><br>
+                    <label><input type="checkbox" class="category" name="options" value="web">網頁</label>
+                    <label><input type="checkbox" class="category" name="options" value="game">遊戲</label>
+                    <label><input type="checkbox" class="category" name="options" value="app">APP</label>
+                    <br>前端技能：
+                    <label><input type="checkbox" id="front" name="options" value="front">前端技能全選</label><br>
+                    <label><input type="checkbox" class="front" name="options" value="CSS">CSS</label>
+                    <label><input type="checkbox" class="front" name="options" value="SCSS">SCSS</label>
+                    <label><input type="checkbox" class="front" name="options" value="Sass">Sass</label>
+                    <label><input type="checkbox" class="front" name="options" value="JavaScript">JavaScript</label>
+                    <label><input type="checkbox" class="front" name="options" value="JQuery">JQuery</label>
+                    <label><input type="checkbox" class="front" name="options" value="Vue">Vue</label>
+                    <label><input type="checkbox" class="front" name="options" value="React">React</label>
+                    <label><input type="checkbox" class="front" name="options" value="Angular">Angular</label>
+                    <br>後端技能：
+                    <label><input type="checkbox" id="back" name="options" value="back">後端技能全選</label><br>
+                    <label><input type="checkbox" class="back" name="options" value="Java">JAVA</label>
+                    <label><input type="checkbox" class="back" name="options" value="Python">Python</label>
+                    <label><input type="checkbox" class="back" name="options" value="Ruby">Ruby</label>
+                    <label><input type="checkbox" class="back" name="options" value="PHP">PHP</label>
+                    <label><input type="checkbox" class="back" name="options" value="C#">C#</label>
+                    <label><input type="checkbox" class="back" name="options" value="C++">C++</label>
+                    <label><input type="checkbox" class="back" name="options" value="Go">Go</label>
+                    <label><input type="checkbox" class="back" name="options" value="Node.js">Node.js</label>
+                    <br>資料庫：
+                    <label><input type="checkbox" id="database" name="options" value="database">資料庫全選</label><br>
+                    <label><input type="checkbox" class="database" name="options" value="MySQL">MySQL</label>
+                    <label><input type="checkbox" class="database" name="options" value="SQLServer">SQL
+                        Server</label>
+                    <label><input type="checkbox" class="database" name="options" value="PostgreSQL">PostgreSQL</label>
+                    <label><input type="checkbox" class="database" name="options" value="MongoDB">MongoDB</label>
                 </form>
             </div>
             <div id="caseBox" class="col-8">
@@ -84,70 +93,29 @@
                 </div>
                 <!-- <div>建議熱搜詞，如技術上無法實現則移除</div> -->
                 <div class="keywordList">
-					<tr th:each="Keyword:${kw}">
-						<button class="keywordBtn">
-							<td th:text=${Keyword.keyword}></td>
-						</button>
-				</div>
-                <!-- <div>
-					<span th:text=${kw.keyword}></span>
-					<span th:text=${kw.keyword}></span>
-					<span th:text=${kw.keyword}></span>
-					<span th:text=${kw.keyword}></span>
-					<span th:text=${kw.keyword}></span>
-				</div> -->
-                <div id="btn">
-                    <button>發布時間</button>
-                    <button>收藏數</button>
+                    <tr th:each="Keyword:${kw}">
+                        <button class="keywordBtn">
+                            <td th:text=${Keyword.keyword}>熱搜詞</td>
+                        </button>
+                    </tr>
                 </div>
-                <div>
-                    <div class="row oneCase">
-                        <img src="img/image.png" alt="" class="col-4">
-                        <div id="" class="col-8">
-                            <h3>案件名稱</h3>
-                            <h4>案件tag</h4>
-                            <h5>案件簡介</h5>
-                        </div>
-                    </div>
-                    <div class="row oneCase">
-                        <img src="img/image.png" alt="" class="col-4">
-                        <div id="" class="col-8">
-                            <h3>案件名稱</h3>
-                            <h4>案件tag</h4>
-                            <h5>案件簡介</h5>
-                        </div>
-                    </div>
-                    <div class="row oneCase">
-                        <img src="img/image.png" alt="" class="col-4">
-                        <div id="" class="col-8">
-                            <h3>案件名稱</h3>
-                            <h4>案件tag</h4>
-                            <h5>案件簡介</h5>
-                        </div>
-                    </div>
-                    <div class="row oneCase">
-                        <img src="img/image.png" alt="" class="col-4">
-                        <div id="" class="col-8">
-                            <h3>案件名稱</h3>
-                            <h4>案件tag</h4>
-                            <h5>案件簡介</h5>
-                        </div>
-                    </div>
-                    <div class="row oneCase">
-                        <img src="img/image.png" alt="" class="col-4">
-                        <div id="" class="col-8">
-                            <h3>案件名稱</h3>
-                            <h4>案件tag</h4>
-                            <h5>案件簡介</h5>
-                        </div>
-                    </div>
-                    <div class="row oneCase">
-                        <img src="img/image.png" alt="" class="col-4">
-                        <div id="" class="col-8">
-                            <h3>案件名稱</h3>
-                            <h4>案件tag</h4>
-                            <h5>案件簡介</h5>
-                        </div>
+                <div id="btn">
+                    <button class="keywordSortBtn" id="caseTimeDSC">截止日(近→遠)預設</button>
+                    <button class="keywordSortBtn" id="caseTimeASC">截止日(遠→近)</button>
+                    <button class="keywordSortBtn" id="caseCollected">收藏數</button>
+                </div>
+                <div id="keywordsearchBox">
+                    <div class="boxBorder caseCards" th:each="keywordCase : ${keywordCase}">
+                        <a class="row" th:href="@{/orderShow(orderid=${keywordCase.orderid})}">
+                            <div class="col-4 caseImgBox">
+                                <img th:src="@{(${keywordCase.picurl})}" alt="">
+                            </div>
+                            <div class="col-8">
+                                <h3 th:text="${keywordCase.name}">案件名稱</h3>
+                                <p th:text="${keywordCase.tagNames}">案件tag</p>
+                                <h5 th:text="${keywordCase.intro}">案件簡介</h5>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

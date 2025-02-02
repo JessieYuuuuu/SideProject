@@ -13,14 +13,14 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
 	// 模糊查詢 name 或 intro 符合 keyword
-	@Query("SELECT o FROM yuOrder o WHERE o.name LIKE %:keyword% OR o.intro LIKE %:keyword%")
+	@Query("SELECT o FROM Order o WHERE o.name LIKE %:keyword% OR o.intro LIKE %:keyword%")
 	List<Order> searchByKeyword(@Param("keyword") String keyword);
 	
 	// 抓取隨機專案
-	@Query("SELECT o FROM yuOrder o ORDER BY FUNCTION('RAND')")
+	@Query("SELECT o FROM Order o ORDER BY FUNCTION('RAND')")
 	List<Order> findRandomOrders();
 
 	// 抓取指定id的專案資料
-	@Query("SELECT o FROM yuOrder o WHERE o.orderid = :orderid")
+	@Query("SELECT o FROM Order o WHERE o.orderid = :orderid")
 	List<Order> findOrdersById(@Param("orderid") Long orderid);
 }

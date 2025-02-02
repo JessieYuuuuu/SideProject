@@ -24,6 +24,22 @@ div{
 #centerMemberIcon>img{
     width: 100%;
 }
+#centerMemberIcon>button{
+    padding: 10px;
+    text-align: center;
+    line-height: 30px;
+    width: 100%;
+    color: brown;
+    font-size: 24px;
+}
+#centerMemberIcon>button:hover{
+    padding: 10px;
+    text-align: center;
+    line-height: 30px;
+    width: 100%;
+    color: brown;
+    background-color: chocolate;
+}
 #centerBox>p{
     line-height: 36px;
     text-align: center;

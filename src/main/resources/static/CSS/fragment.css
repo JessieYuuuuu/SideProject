@@ -50,6 +50,7 @@ header {
     border-radius: 10px;
     border: 1px solid #eaeff3;
     color: #eaeff3;
+    transition: 1s;
 }
 
 #logoBtn {
@@ -126,11 +127,17 @@ footer>span {
     /* justify-content: space-evenly; */
 }
 .keywordBtn{
-    margin: 2px 0;
+    margin: 8px 0 6px 0;
     padding: 2px 5px;
-    border-radius: 5px;
-    background-color: #14518e;
-    color: #bbc8d8;
+    border-width: 0 0 1px 0;
+    border-color: transparent;
+    border-style: solid;
+    color: #14518e;
+}
+.keywordBtn:hover{
+    border-width: 0 0 1px 0;
+    border-color: #c59650;
+    border-style: solid;
 }
 .randomKeyword{
     color: #c59650;

@@ -39,6 +39,7 @@ $("#memberLike").click(function () {
     .catch(error => console.error('Error loading content:', error));
 });
 $("#memberMail").click(function () {
+    event.preventDefault();
     fetch("memberMail")
     .then(response => response.text())
     .then(data => { 

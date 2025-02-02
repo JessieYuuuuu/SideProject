@@ -22,7 +22,7 @@ public class Member {
 	@NotEmpty(message = "帳號不可為空")
 	private String account;
 	@NotEmpty(message = "密碼不可為空")
-	private String passwd;
+	private String password;
 	@NotEmpty(message = "姓名不可為空")
 	private String email;
 	private String name;
@@ -55,11 +55,11 @@ public class Member {
 	}
 
 	public String getPasswd() {
-		return passwd;
+		return password;
 	}
 
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setPasswd(String password) {
+		this.password = password;
 	}
 
 	public String getName() {

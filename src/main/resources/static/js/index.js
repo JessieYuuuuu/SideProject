@@ -1,5 +1,5 @@
- // 隨機關鍵字
- function getRandomKeyword() {
+// 隨機關鍵字
+function getRandomKeyword() {
     fetch('/randomKeyword')
         .then(response => response.text())
         .then(keyword => {
@@ -11,12 +11,31 @@
         .catch(error => console.error('抓取關鍵字錯誤:', error));
 }
 
+//使用者點搜尋框時清除隨機關鍵字
 function clearPlaceholder() {
     var searchInput = $("#keyword");
     if (searchInput.val() === randomKeyword) {
         searchInput.val("");
         searchInput.removeClass("randomKeyword");
     }
+}
+
+function subMemberid(memberid){
+    console.log('進入傳輸表單的function')
+    var form = $('<form>',{
+        'method':'POST',
+        'action':'/memberShow'
+    });
+
+    var input =$('<input>',{
+        'type':'hidden',
+        'name':'memberid',
+        'value':memberid
+    });
+
+    form.append(input);
+    $('body').append(form);
+    form.submit();
 }
 
 $(document).ready(function () {
@@ -48,27 +67,32 @@ $(document).ready(function () {
         $("input[name='options']:checked").each(function () {
             option.push($(this).val());
         });
-        // console.log(option.length);
-
+        option = option.length ? option : [];
+        console.log(option.length);
+        //交給後端存入關鍵字
         if (keyword != "" || option.length != 0) {
             var params = new URLSearchParams();
-            params.append("keyword", keyword);
+            params.append("keyword", encodeURIComponent(keyword));
             option.forEach(option =>
-                params.append("options", option));
+                params.append("options", encodeURIComponent(option)));
 
-            //存為URL
-            window.location.href = "/search?" + params.toString();
-            console.log("使用者輸入為: " + keyword + ",checkbox: " + option);
-        }
-
-        //交給後端存入關鍵字
-        if (keyword != "") {
-            $.post("/saveKeyword", { userKeyword: keyword }, function (response) {
+            $.post("/SaveAndSearchKeyword", { userKeyword: keyword, options: option }, function (response) {
                 console.log("關鍵字已儲存");
+                //利用thymeleaf模板返回搜尋資料
+                fetch("/SaveAndSearchKeyword")
+                    .then(response => response.text())
+                    .then(data => {
+                        $("#keywordsearchBox").html(data);
+                    })
+                    .catch(error => console.error('Error loading content:', error));
+                //存為URL
+                window.location.href = "/search?" + params.toString();
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 console.log("請求失敗: " + textStatus + ", " + errorThrown);
             });
+            console.log("使用者輸入為: " + keyword + ",checkbox: " + option);
         }
+
     });
     //針對新增在頁面上的關鍵字加入點擊功能
     $(".keywordBtn").on('click', function () {
@@ -76,4 +100,34 @@ $(document).ready(function () {
         $("#keyword").val($(this).text().trim());
         $("#searchButton").click();
     })
+
+    //新增全選選項
+    $("input").change(function () {
+        $(`input[class='${this.id}']`).prop('checked', this.checked);
+        $(`input[id='location']`).prop('checked',
+            $(`input[class='location']:checked`).length ==
+            $(`input[class='location']`).length);
+        $(`input[id='category']`).prop('checked',
+            $(`input[class='category']:checked`).length ==
+            $(`input[class='category']`).length);
+        $(`input[id='front']`).prop('checked',
+            $(`input[class='front']:checked`).length ==
+            $(`input[class='front']`).length);
+        $(`input[id='back']`).prop('checked',
+            $(`input[class='back']:checked`).length ==
+            $(`input[class='back']`).length);
+        $(`input[id='database']`).prop('checked',
+            $(`input[class='database']:checked`).length ==
+            $(`input[class='database']`).length);
+    });
+
+    //點擊框
+    $('.memberLink').click(function(event){
+        console.log('我被點到了');
+        event.preventDefault();
+        var memberid = $(this).data('memberid');
+        console.log(memberid);
+        subMemberid(memberid);
+    })
+
 });
